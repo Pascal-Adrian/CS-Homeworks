@@ -34,52 +34,55 @@ def two_key_caesar_decrypt(text: str, shift: int, permutation: str):
 
 
 def main():
-    type = input("Enter type (encrypt/decrypt): ")
+    while True:
+        type = input("Enter type (encrypt/decrypt): ")
+        if type == "exit":
+            break
 
-    if type not in ["encrypt", "decrypt"]:
-        print("Invalid type")
-        return
+        if type not in ["encrypt", "decrypt"]:
+            print("Invalid type")
+            continue
 
-    text = input("Enter text: ")
+        text = input("Enter text: ")
 
-    if text == "":
-        print("Text cannot be empty")
-        return
+        if text == "":
+            print("Text cannot be empty")
+            continue
 
-    text = text.upper().replace(" ", "")
+        text = text.upper().replace(" ", "")
 
-    print("Text: ", text)
+        print("Text: ", text)
 
-    for char in text:
-        if char not in letters and char != " ":
-            print("Invalid character in text")
-            return
+        for char in text:
+            if char not in letters and char != " ":
+                print("Invalid character in text")
+                continue
 
-    shift = int(input("Enter shift: "))
+        shift = int(input("Enter shift: "))
 
-    if shift < 0 or shift > 25:
-        print("Shift must be between 0 and 25")
-        return
+        if shift < 0 or shift > 25:
+            print("Shift must be between 0 and 25")
+            continue
 
-    permutation = input("Enter permutation: ")
+        permutation = input("Enter permutation: ")
 
-    permutation = permutation.upper().replace(" ", "")
+        permutation = permutation.upper().replace(" ", "")
 
-    if permutation == "" and len(permutation) < 7:
-        print("Permutation cannot be empty")
-        return
+        if permutation == "" and len(permutation) < 7:
+            print("Permutation cannot be empty")
+            continue
 
-    for char in permutation:
-        if char not in letters:
-            print("Invalid character in permutation", char)
-            return
+        for char in permutation:
+            if char not in letters:
+                print("Invalid character in permutation", char)
+                continue
 
-    if type == "decrypt":
-        decrypted_text = two_key_caesar_decrypt(text, shift, permutation)
-        print("Decrypted text: ", decrypted_text)
-    else:
-        encrypted_text = two_key_caesar_encrypt(text, shift, permutation)
-        print("Encrypted text: ", encrypted_text)
+        if type == "decrypt":
+            decrypted_text = two_key_caesar_decrypt(text, shift, permutation)
+            print("Decrypted text: ", decrypted_text)
+        else:
+            encrypted_text = two_key_caesar_encrypt(text, shift, permutation)
+            print("Encrypted text: ", encrypted_text)
 
 
 if __name__ == "__main__":
